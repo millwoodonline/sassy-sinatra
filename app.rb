@@ -5,19 +5,18 @@ require 'bootstrap-sass'
 
 
 class App < Sinatra::Base
+  path = File.expand_path(File.dirname(__FILE__))
   set :root, '/'
-  set :views, "#{File.expand_path(File.dirname(__FILE__))}/views"
+  set :views, "#{path}/views"
   register Sinatra::AssetPack
 	assets do
-   serve '/css', from: "#{File.expand_path(File.dirname(__FILE__))}/css"
+   serve '/css', from: "#{path}/css"
    serve '/bootstrapjs', from: "#{Bootstrap.javascripts_path}/bootstrap"
-   serve '/', from: "#{File.expand_path(File.dirname(__FILE__))}/js"
 
     css :main, [
      '/css/*.css'
     ]
     js :main, [
-    '/*.js',
     '/bootstrapjs/*.js'
     ]
     css_compression :sass
